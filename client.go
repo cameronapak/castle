@@ -117,7 +117,7 @@ func (c *Client) writePump() {
 }
 
 // serveWebSocket handles websocket requests from the peer.
-func serveWebSocket(chat *Chat, w http.ResponseWriter, r *http.Request) {
+func ServeWebSocket(chat *Chat, w http.ResponseWriter, r *http.Request) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)

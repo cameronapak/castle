@@ -16,7 +16,7 @@ type Chat struct {
 	unregister chan *Client
 }
 
-func newChat() *Chat {
+func NewChat() *Chat {
 	return &Chat{
 		broadcast:  make(chan []byte),
 		register:   make(chan *Client),

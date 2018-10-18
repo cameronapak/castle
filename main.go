@@ -23,11 +23,15 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	flag.Parse()
-	chat := newChat()
+	chat := NewChat()
 	go chat.run()
+	
+	fs := http.FileServer(http.Dir("src"))
+  http.Handle("/src/", http.StripPrefix("/src/", fs))
+
 	http.HandleFunc("/", serveHome)
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
-		serveWebSocket(chat, w, r)
+		ServeWebSocket(chat, w, r)
 	})
 	err := http.ListenAndServe(*addr, nil)
 	if err != nil {
